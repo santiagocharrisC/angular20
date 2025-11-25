@@ -1,0 +1,23 @@
+
+<h1 class="text-2xl font-bold ">Seleccione un continentes</h1>
+
+<section class="row mt-2">
+  <div class="flex-col">
+    @for ( continente of continents; track continente) {
+      <button class="btn mr-2 w-[100px]
+       text-neutral-50 btn-outline"
+        (click)="selectedContinent.set(continente)"
+        [class.btn-primary]="selectedContinent() === continente"
+      >
+        {{continente}}
+      </button>
+    }
+  </div>
+</section>
+
+<app-country-list
+  [countries]="countryResource.hasValue() ? countryResource.value(): []"
+  [errorMessage]="countryResource.error()"
+  [isEmpty]="countryResource.value()?.length == 0"
+  [isLoading]="countryResource.isLoading()"
+></app-country-list>

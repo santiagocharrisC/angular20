@@ -1,0 +1,47 @@
+
+<section class="mx-10">
+
+  <h1 class="text-3xl font-black text-gray-50">{{country().name}}</h1>
+
+</section>
+
+<section class="stats shadow text-gray-50 text-center">
+  <div class="stat place-items-center">
+    <div class="stat-title">Poblacion</div>
+    <div class="stat-value ">{{country().population | number}}</div>
+    <div class="stat-desc">Año {{currentYear()}}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Nombre</div>
+    <div class="stat-value text-primary">{{country().name}}</div>
+    <div class="stat-desc">{{country().continete}}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">sub Continente</div>
+    <div class="stat-value">{{country().subContinete}}</div>
+    <div class="stat-desc">{{country().continete}}</div>
+  </div>
+
+  <div class="stat place-items-center">
+    <div class="stat-title">Bandera</div>
+    <div class="stat-value">{{country().flag}}</div>
+    <div class="stat-desc">{{country().subContinete}}</div>
+  </div>
+</section>
+
+<section class="diff aspect-[16/9] scale-80">
+  <div class="diff-item-1" >
+    <img
+    [alt]="country().name"
+    [src]="country().flagSvg" />
+  </div>
+  <div class="diff-item-2">
+    <img
+      class="blur brightness-75"
+      [alt]="country().name"
+      [src]="country().flagSvg"/>
+  </div>
+  <div class="diff-resizer"></div>
+</section>
