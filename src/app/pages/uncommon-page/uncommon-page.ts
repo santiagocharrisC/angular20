@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Card } from "../../components/card/card";
-import { I18nPluralPipe, I18nSelectPipe, SlicePipe } from '@angular/common';
+import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
+import { timeout } from 'rxjs';
 
 const client1 = {
   name: 'Santiago',
@@ -17,7 +18,17 @@ const client2 = {
 
 @Component({
   selector: 'app-uncommon-page',
-  imports: [Card, I18nSelectPipe, I18nPluralPipe, SlicePipe],
+  imports: [
+    Card,
+    I18nSelectPipe,
+    I18nPluralPipe,
+    SlicePipe,
+    JsonPipe,
+    UpperCasePipe,
+    KeyValuePipe,
+    TitleCasePipe,
+    AsyncPipe
+  ],
   templateUrl: './uncommon-page.html',
 })
 export default class UncommonPage {
@@ -61,4 +72,19 @@ export default class UncommonPage {
     this.clients.update(prev => prev.slice(1) );
   }
 
+  // KeyValue Pipe
+  profile = {
+    name: 'Fran',
+    age: 22,
+    address: 'Barranquilla, Colombia'
+  }
+
+  // Async Pipe
+  promiseValue: Promise<string> =  new Promise(( resolve, reject) => {
+    setTimeout(() => {
+      reject('tenemos un error en la data')
+      // resolve('Tenemos data en la promesa.')
+      console.log('promesa finalizada')
+    },3500)
+  })
 }
