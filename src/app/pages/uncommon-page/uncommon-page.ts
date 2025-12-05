@@ -1,7 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { Card } from "../../components/card/card";
 import { AsyncPipe, I18nPluralPipe, I18nSelectPipe, JsonPipe, KeyValuePipe, SlicePipe, TitleCasePipe, UpperCasePipe } from '@angular/common';
-import { timeout } from 'rxjs';
+import { interval, map, tap, timeout } from 'rxjs';
 
 const client1 = {
   name: 'Santiago',
@@ -82,9 +82,15 @@ export default class UncommonPage {
   // Async Pipe
   promiseValue: Promise<string> =  new Promise(( resolve, reject) => {
     setTimeout(() => {
-      reject('tenemos un error en la data')
-      // resolve('Tenemos data en la promesa.')
+      // reject('tenemos un error en la data')
+      resolve('Tenemos data en la promesa.')
       console.log('promesa finalizada')
     },3500)
   })
+
+  myObservableTimer = interval(2000).pipe(
+    map( (value) => value + 1),
+    tap( (value) => console.log('tap:', value))
+  )
+
 }
