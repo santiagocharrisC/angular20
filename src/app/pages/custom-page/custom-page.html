@@ -17,13 +17,13 @@
 <div class="divider my-2"></div>
 
 <section class="my-2">
-  <h1 class="text-2xl font-bold">Pipes Personalizado en accion</h1>
+  <h1 class="text-2xl font-bold">Filtrando por: XXXX ordenando por: {{sortBy()}} </h1>
 
   <div class="flex gap-2 justify-end w-full">
-    <button class="btn btn-primary"> por Nombre</button>
-    <button class="btn btn-accent"> por volar</button>
-    <button class="btn btn-secondary"> por Color</button>
-    <button class="btn btn-info"> por Creador</button>
+    <button (click)="sortBy.set('name')" class="btn btn-primary"> por Nombre</button>
+    <button (click)="sortBy.set('canFly')" class="btn btn-accent"> por volar</button>
+    <button (click)="sortBy.set('color')" class="btn btn-secondary"> por Color</button>
+    <button (click)="sortBy.set('creator')" class="btn btn-info"> por Creador</button>
   </div>
 
 </section>
@@ -42,26 +42,25 @@
     </thead>
     <tbody>
       <!-- row 1 -->
-       @for (hero of heroes(); track hero.id; let i = $index) {
-        <tr>
-          <td>{{i + 1}}</td>
-          <td>{{hero.name}}</td>
-          <td><samp
-            class="text-xs w-44"
-            [class.text-success]="hero.canFly"
-            [class.text-accent]="!hero.canFly"
-            >{{hero.canFly | CanFly}}</samp>
-          </td>
-          <td>
-            <span
-            class="text-xs w-44"
-            >
-              {{hero.color | HeroColor}}
-            </span>
-          </td>
-          <td>{{hero.creator}}</td>
-        </tr>
-       }
+      @for (hero of heroes() | heroSortBy:sortBy(); track hero.id; let i = $index) {
+      <tr>
+        <td>{{i + 1}}</td>
+        <td>{{hero.name}}</td>
+        <td><samp class="text-xs w-44" [class.text-success]="hero.canFly"
+            [class.text-accent]="!hero.canFly">{{hero.canFly | CanFly}}</samp>
+        </td>
+        <td>
+          <span class="text-xs w-44" [style.color]="hero.color | heroTextColorPipe">
+            {{hero.color | HeroColor | titlecase}}
+          </span>
+        </td>
+        <td>
+          <span [class.text-primary]="hero.creator == 0" [class.text-accent]="hero.creator == 1">
+            {{hero.creator | heroCreator | toggleCase}}
+          </span>
+        </td>
+      </tr>
+      }
 
     </tbody>
   </table>
