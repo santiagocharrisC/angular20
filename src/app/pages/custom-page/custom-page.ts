@@ -8,6 +8,7 @@ import { TitleCasePipe } from '@angular/common';
 import { HeroCreatorPipe } from '../../pipe/heroCreator.pipe';
 import { HeroSortByPipe } from '../../pipe/heroSortBy.pipe';
 import { Hero } from '../../interfaces/hero.interface';
+import { HeroFilterPipe } from '../../pipe/HeroFilter.pipe';
 @Component({
   selector: 'app-custom-page',
   imports: [
@@ -17,7 +18,8 @@ import { Hero } from '../../interfaces/hero.interface';
     HeroTextColorPipe,
     TitleCasePipe,
     HeroCreatorPipe,
-    HeroSortByPipe
+    HeroSortByPipe,
+    HeroFilterPipe
   ],
   templateUrl: './custom-page.html',
 })
@@ -29,4 +31,6 @@ export default class CustomPage {
   heroes = signal(heroes)
 
   sortBy = signal<keyof Hero | null>(null)
+
+  searchQuery = signal('')
 }
